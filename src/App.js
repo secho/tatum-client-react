@@ -1,28 +1,25 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, {useReducer} from 'react';
+import {Switch, BrowserRouter, Route} from 'react-router-dom';
 import './App.css';
+import HomePage from './pages/HomePage';
+import AnotherPage from './pages/AnotherPage';
+import { Context, initialState, reducer } from "./store";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+
+const App = () => {
+
+  const [store, dispatch] = useReducer(reducer, initialState);
+  
+  return (
+    <Context.Provider value={{ store, dispatch }}>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={ HomePage }/>
+          <Route path="/another" component={ AnotherPage }/>
+        </Switch>
+      </BrowserRouter>
+    </Context.Provider>
+  );
 }
 
 export default App;
