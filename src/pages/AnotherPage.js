@@ -1,7 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import DataAdder from "../components/DataAdder";
-import ClientsList from "../components/ClientsList";
 
 
 export default () => (
@@ -11,9 +9,7 @@ export default () => (
       <Link to="/">Home</Link>
     </header>
     <section>
-        <DataAdder/>
-        <DataAdder/>
-        <ClientsList/>
+      
     </section>
   </>
 );

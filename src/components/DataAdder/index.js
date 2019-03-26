@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import { Context } from '../../store';
+import { Context } from '../../store/store';
 
 
 
@@ -10,7 +10,7 @@ const DataAdder = (props) => {
 
     return (
         <div>
-            <button onClick={() => dispatch({type: "add", value: 99})}>{store.data.length}</button>
+            <button onClick={() => dispatch({type: "increment"})}>{store.value}</button>
         </div>
     )
 }
