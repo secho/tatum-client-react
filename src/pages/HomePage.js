@@ -12,12 +12,12 @@ export default () => (
       <Link to="/another">Detail</Link>
     </header>
     <section>
-        <User pre={'My'}>
+        {/* <User pre={'My'}>
           <p>toto je user</p>
           <DataAdder/>
-        </User>
+        </User> */}
         <TatumCustomers/>
-        <DataAdder/>
+        {/* <DataAdder/> */}
     </section>
   </>
 );
