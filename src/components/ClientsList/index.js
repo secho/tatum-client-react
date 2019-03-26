@@ -16,7 +16,7 @@ const ClientsList = (props) => {
         <Fragment>
                 <form onSubmit={event => {
                 service.doFetch(
-                    `http://hn.algolia.com/api/v1/search?query=${query}`,
+                    {url: `http://hn.algolia.com/api/v1/search?query=${query}`}
                 );
                 event.preventDefault();
                 }}>

@@ -1,5 +1,5 @@
 import {useState, useEffect, useReducer} from 'react';
-import axios from 'axios';
+import axios, {AxiosRequestConfig} from 'axios';
 
 const dataFetchReducer = (state, action) => {
     switch (action.type) {
@@ -27,19 +27,23 @@ const dataFetchReducer = (state, action) => {
       }
 }
 
-export const useDataApi = (initialUrl, initialData) => {
-    const [url, setUrl] = useState(initialUrl);
+export const useDataApi = (initialRequest, initialData) => {
+    const [request, setRequest] = useState(initialRequest);
     const [state, dispatch] = useReducer(dataFetchReducer, {
         isLoading: false,
         isError: false,
         data: initialData,
     });
     useEffect(() => {
+        request.header = {
+            
+        }
+        console.log(request.method);
         let didCancel = false;
         const fetchData = async () => {
             dispatch({type: 'FETCH_INIT'});
             try {
-                const result = await axios(url);
+                const result = await axios(request);
                 if (!didCancel) {
                     dispatch({type: 'FETCH_SUCCESS', payload: result.data})
                 }
@@ -54,10 +58,10 @@ export const useDataApi = (initialUrl, initialData) => {
         return () => {
             didCancel = true;
         };
-    }, [url]);
+    }, [request]);
 
-    const doFetch = url => {
-        setUrl(url);
+    const doFetch = request => {
+        setRequest(request);
     }
 
     return { ...state, doFetch };

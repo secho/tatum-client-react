@@ -11,7 +11,7 @@ const App = () => {
 
   const [store, dispatch] = useReducer(reducer, initialState);
   const { data, isLoading, isError, doFetch } = useDataApi(
-    'http://hn.algolia.com/api/v1/search?query=redux',
+    {url:'http://hn.algolia.com/api/v1/search?query=redux', method:'GET'},
     { hits: [] },
   );
   
