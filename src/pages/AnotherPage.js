@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import NewTatumCustomer from "../components/NewTatumCustomer";
 
 
 export default () => (
@@ -9,7 +10,7 @@ export default () => (
       <Link to="/">Home</Link>
     </header>
     <section>
-      
+      <NewTatumCustomer/>
     </section>
   </>
 );

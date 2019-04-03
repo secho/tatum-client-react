@@ -7,10 +7,7 @@ import User from "../components/User";
 
 export default () => (
   <>
-    <header>
-      <h1>Overview</h1>
-      <Link to="/another">Detail</Link>
-    </header>
+
     <section>
         {/* <User pre={'My'}>
           <p>toto je user</p>

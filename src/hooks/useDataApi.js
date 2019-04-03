@@ -30,8 +30,10 @@ const dataFetchReducer = (state, action) => {
 export const useDataApi = (initialRequest, initialData) => {
   const [request, setRequest] = useState(initialRequest);
 
-  request.headers = {
-    'X-client-secret': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcmVhdGVkIjoxNTQ1MTYzMjYwMDAwLCJhcGlLZXkiOiJhc2tqbG5mcTIzaW5mcTIzZjg5cHFmbnE5OG5nIn0.TscRGH5FScYvMiRx86Vl0JgWpCqIsKQoKaKSA09lU_0',
+  if (request) {
+    request.headers = {
+      'X-client-secret': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcmVhdGVkIjoxNTQ1MTYzMjYwMDAwLCJhcGlLZXkiOiJhc2tqbG5mcTIzaW5mcTIzZjg5cHFmbnE5OG5nIn0.TscRGH5FScYvMiRx86Vl0JgWpCqIsKQoKaKSA09lU_0',
+    }
   }
 
   const [state, dispatch] = useReducer(dataFetchReducer, {
@@ -39,14 +41,16 @@ export const useDataApi = (initialRequest, initialData) => {
     isError: false,
     data: initialData,
   });
-  
+
   useEffect(() => {
-    console.log(request.method);
+    if (request) {
+      console.log(request.method);
+    }
     let didCancel = false;
     const fetchData = async () => {
       dispatch({ type: 'FETCH_INIT' });
       try {
-                const result = await axios(request);
+        const result = await axios(request);
         if (!didCancel) {
           dispatch({ type: 'FETCH_SUCCESS', payload: result.data })
         }
@@ -67,5 +71,19 @@ export const useDataApi = (initialRequest, initialData) => {
     setRequest(request);
   }
 
-  return { ...state, doFetch };
+  const customerService = (action, data) => {
+    switch (action) {
+      case 'getCustomers': {
+        setRequest(
+          {
+            url: 'https://sandbox.tatum.io/api/v1/customer',
+            method: 'GET',
+          }
+        )
+      }
+
+    }
+  }
+
+  return { ...state, doFetch, customerService };
 }
